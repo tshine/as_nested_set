@@ -6,11 +6,11 @@ defmodule AsNestedSet.Mixfile do
      version: "3.1.1",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
-     description: description,
-     package: package,
+     description: description(),
+     package: package(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps()]
   end
 
   defp description do
@@ -19,7 +19,7 @@ defmodule AsNestedSet.Mixfile do
     """
   end
 
-  defp package do
+  defp package() do
     [
       name: :as_nested_set,
       files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
@@ -29,15 +29,15 @@ defmodule AsNestedSet.Mixfile do
     ]
   end
 
-  def application do
+  def application() do
     [applications: app_list(Mix.env)]
   end
 
-  def app_list(:test), do: app_list ++ [:ecto, :postgrex, :ex_machina]
-  def app_list(_), do: app_list
-  def app_list, do: [:logger]
+  def app_list(:test), do: app_list() ++ [:ecto, :postgrex, :ex_machina]
+  def app_list(_), do: app_list()
+  def app_list(), do: [:logger]
 
-  defp deps do
+  defp deps() do
     [
       {:ecto, "~> 2.1.0"},
       {:ex_doc, ">= 0.0.0", only: :dev},
@@ -47,6 +47,6 @@ defmodule AsNestedSet.Mixfile do
   end
 
   defp elixirc_paths(:test), do: elixirc_paths ++ ["test/support"]
-  defp elixirc_paths(_), do: elixirc_paths
-  defp elixirc_paths, do: ["lib"]
+  defp elixirc_paths(_), do: elixirc_paths()
+  defp elixirc_paths(), do: ["lib"]
 end
